@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
+import java.sql.Connection;
+
 @Log4j2
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(locations = "file:src/main/webapp/WEB-INF/root-context.xml")
@@ -16,10 +19,24 @@ public class SampleTests {
     @Autowired
     private ExService exService;
 
+    @Autowired
+    private DataSource dataSource;
+
     @Test
     public void testService1() {
 
         log.info(exService);
         Assertions.assertNotNull(exService);
     }
+
+    @Test
+    public void testConnection() throws Exception {
+
+        Connection connection = dataSource.getConnection();
+        log.info(connection);
+        Assertions.assertNotNull(connection);
+
+        connection.close();
+    }
+
 }
