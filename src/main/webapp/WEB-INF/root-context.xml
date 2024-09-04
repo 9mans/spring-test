@@ -10,8 +10,6 @@
            http://mybatis.org/schema/mybatis-spring
            http://mybatis.org/schema/mybatis-spring.xsd">
 
-    <context:component-scan base-package="com.sample.springtest.ex"/>
-
     <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/webdb"/>
@@ -37,6 +35,10 @@
     </bean>
 
     <mybatis:scan base-package="com.sample.springtest.mapper"></mybatis:scan>
+
+    <context:component-scan base-package="com.sample.springtest.config"/>
+    <context:component-scan base-package="com.sample.springtest.service"/>
+
 
 
 </beans>

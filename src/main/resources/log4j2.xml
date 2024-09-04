@@ -18,9 +18,14 @@
             <appender-ref ref="console"/>
         </Logger>
 
+        <logger name="com.sample.springtest.mapper" level="TRACE" additivity="false">
+            <appender-ref ref="console"></appender-ref>
+        </logger>
+
         <root level="INFO" additivity="false">
             <AppenderRef ref="console"/>
         </root>
     </Loggers>
+
 
 </configuration>
