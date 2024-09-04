@@ -1,5 +1,6 @@
 package com.sample.springtest.service;
 
+import com.sample.springtest.domain.TodoVO;
 import com.sample.springtest.dto.TodoDTO;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
@@ -30,3 +31,4 @@ public class TodoServiceTests {
         todoService.register(todoDTO);
     }
 }
+
