@@ -90,7 +90,7 @@
                     <label class="form-check-label">
                         Finished &nbsp;
                     </label>
-                    <input class="form-check-input" type="checkbox" name="finished" ${dto.finished?"checked":""} disabled>
+                    <input class="form-check-input" type="checkbox" name="finished" ${dto.finished?"checked":""}>
                 </div>
 
                 <div class="my-4">
@@ -127,6 +127,13 @@
                 }, false);
             });
 
+            document.querySelector(".btn-secondary").addEventListener("click", function (e) {
+                e.preventDefault()
+                e.stopPropagation()
+
+                self.location = "/todo/list";
+            }, false);
+
             const serverValidResult = {}
 
             <c:forEach items="${errors}" var="error">
@@ -134,6 +141,7 @@
             </c:forEach>
 
             console.log(serverValidResult)
+
         </script>
 
     </div>

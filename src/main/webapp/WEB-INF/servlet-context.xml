@@ -21,24 +21,13 @@
     <bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
         <property name="formatters">
             <set>
-                <bean class="com.sample.springtest.controller.formmater.LocalDateFormatter"></bean>
+                <bean class="com.sample.springtest.controller.formatter.LocalDateFormatter"></bean>
+                <bean class="com.sample.springtest.controller.formatter.CheckboxFormatter"/>
             </set>
         </property>
     </bean>
 
     <mvc:annotation-driven conversion-service="conversionService"></mvc:annotation-driven>
-
-    <bean id = "conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
-        <property name="formatters">
-            <set>
-                <bean class="com.sample.springtest.controller.formmater.LocalDateFormatter"/>
-                <bean class="com.sample.springtest.controller.formmater.CheckboxFormatter"/>
-            </set>
-        </property>
-    </bean>
-
-
-
 
 
 </beans>

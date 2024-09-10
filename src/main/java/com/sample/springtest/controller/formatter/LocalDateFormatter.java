@@ -1,4 +1,4 @@
-package com.sample.springtest.controller.formmater;
+package com.sample.springtest.controller.formatter;
 
 import org.springframework.format.Formatter;
 
