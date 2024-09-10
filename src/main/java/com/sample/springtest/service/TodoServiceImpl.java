@@ -1,6 +1,8 @@
 package com.sample.springtest.service;
 
 import com.sample.springtest.domain.TodoVO;
+import com.sample.springtest.dto.PageRequestDTO;
+import com.sample.springtest.dto.PageResponseDTO;
 import com.sample.springtest.dto.TodoDTO;
 import com.sample.springtest.mapper.TodoMapper;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +22,24 @@ public class TodoServiceImpl implements TodoService{
     private final ModelMapper modelMapper;
 
     @Override
+    public PageResponseDTO<TodoDTO> getList(PageRequestDTO pageRequestDTO) {
+
+        List<TodoVO> voList = todoMapper.selectList(pageRequestDTO);
+        List<TodoDTO> dtoList = voList.stream().map(vo -> modelMapper.map(vo, TodoDTO.class))
+                .collect(Collectors.toList());
+
+        int total = todoMapper.getCount(pageRequestDTO);
+
+        PageResponseDTO<TodoDTO> pageResponseDTO = PageResponseDTO.<TodoDTO>withAll()
+                .dtoList(dtoList)
+                .total(total)
+                .pageRequestDTO(pageRequestDTO)
+                .build();
+
+        return pageResponseDTO;
+    }
+
+    @Override
     public void register(TodoDTO todoDTO) {
 
         log.info(modelMapper);
@@ -31,15 +51,15 @@ public class TodoServiceImpl implements TodoService{
         todoMapper.insert(todoVO);
     }
 
-    @Override
-    public List<TodoDTO> getAll() {
-        List<TodoDTO> dtoList = todoMapper.selectAll()
-                .stream()
-                .map(vo -> modelMapper.map(vo, TodoDTO.class))
-                .collect(Collectors.toList());
-
-        return dtoList;
-    }
+//    @Override
+//    public List<TodoDTO> getAll() {
+//        List<TodoDTO> dtoList = todoMapper.selectAll()
+//                .stream()
+//                .map(vo -> modelMapper.map(vo, TodoDTO.class))
+//                .collect(Collectors.toList());
+//
+//        return dtoList;
+//    }
 
     @Override
     public TodoDTO getOne(Long tno) {

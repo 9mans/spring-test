@@ -1,5 +1,6 @@
 package com.sample.springtest.controller;
 
+import com.sample.springtest.dto.PageRequestDTO;
 import com.sample.springtest.dto.TodoDTO;
 import com.sample.springtest.service.TodoService;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,18 @@ import javax.validation.Valid;
 public class TodoController {
 
     private final TodoService todoService;
+
+    @GetMapping("/list")
+    public void list(@Valid PageRequestDTO pageRequestDTO, BindingResult bindingResult, Model model) {
+
+        log.info(pageRequestDTO);
+
+        if(bindingResult.hasErrors()) {
+            pageRequestDTO = PageRequestDTO.builder().build();
+        }
+
+        model.addAttribute("responseDTO", todoService.getList(pageRequestDTO));
+    }
 
 //    @RequestMapping(value = "/register", method = RequestMethod.GET)
     @GetMapping("/register")
@@ -44,13 +57,6 @@ public class TodoController {
         return "redirect:/todo/list";
     }
 
-    @RequestMapping("/list")
-    public void list(Model model) {
-
-        log.info("list,,,,,");
-
-        model.addAttribute("dtoList", todoService.getAll());
-    }
 
     @GetMapping({"/read", "/modify"})
     public void read(Long tno, Model model) {
