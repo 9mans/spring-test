@@ -13,14 +13,10 @@ import java.time.LocalDate;
 public class TodoDTO {
 
     private Long tno;
-
     @NotEmpty
     private String title;
-
     private LocalDate dueDate;
-
     private boolean finished;
-
     @NotEmpty
     private String writer;
 
